@@ -7,9 +7,9 @@ Cross-platform checksum correction tool for Bosch Motronic ECUs.
 - [x] BMW DME 402
 - [x] BMW DME 403
 - [x] BMW DME 403
-- [] BMW DME 405
-- [] BMW DME 413
-- [] BMW DME 173
+- [ ] BMW DME 405
+- [ ] BMW DME 413
+- [ ] BMW DME 173
     
 #### Requirement:
 
