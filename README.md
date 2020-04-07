@@ -6,16 +6,9 @@ Cross-platform checksum correction tool for Bosch Motronic ECUs.
 
 - [x] BMW DME 402
 - [x] BMW DME 403
-- [x] BMW DME 403
 - [ ] BMW DME 405
 - [ ] BMW DME 413
 - [ ] BMW DME 173
-    
-#### Requirement:
-
-1. Postgres database
-2. Golang
-3. GNU Make (Optional)
 
 #### Usage:
 
