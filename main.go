@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -11,22 +12,27 @@ import (
 )
 
 func main() {
-	prompt := promptui.Prompt{
-		Label:     "Save to file",
-		IsConfirm: true,
+	validate := func(input string) error {
+		if len(input) < 3 {
+			return errors.New("Filename must have more than 3 characters")
+		}
+		return nil
 	}
 
-	args := os.Args[1:]
+	prompt := promptui.Prompt{
+		Label:    "File",
+		Validate: validate,
+		Default:  "",
+	}
 
-	if len(args) == 0 {
-		color.Red("Please input path to file")
+	filePath, err := prompt.Run()
+	if err != nil {
+		fmt.Printf("Prompt failed %v\n", err)
 
 		// Delay exiting
 		time.Sleep(time.Second)
 		return
 	}
-
-	filePath := args[0]
 
 	file, err := os.OpenFile(filePath, os.O_RDWR, 0644)
 	defer file.Close()
@@ -78,6 +84,11 @@ func main() {
 		// Delay exiting
 		time.Sleep(time.Second)
 		return
+	}
+
+	prompt = promptui.Prompt{
+		Label:     "Save to file",
+		IsConfirm: true,
 	}
 
 	_, err = prompt.Run()
