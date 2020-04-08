@@ -63,12 +63,14 @@ func main() {
 	}
 
 	found := false
+	corrNeeded := false
 
 	if err = motronic.BMW402C098Validate(buf); err == nil {
 		found = true
 		color.Blue("BMW DME\nHW: 402\nChip: 098")
 
 		csNew, csOld := motronic.BMW402C098Checksum(buf, true)
+		corrNeeded = (csNew != csOld)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
@@ -78,6 +80,7 @@ func main() {
 		color.Blue("BMW DME\nHW: 402\nChip: 599")
 
 		csNew, csOld := motronic.BMW402C599Checksum(buf, true)
+		corrNeeded = (csNew != csOld)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
@@ -87,6 +90,7 @@ func main() {
 		color.Blue("BMW DME\nHW: 403\nChip: TBC")
 
 		csNew, csOld := motronic.BMW403Checksum(buf, true)
+		corrNeeded = (csNew != csOld)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
@@ -96,6 +100,7 @@ func main() {
 		color.Blue("BMW DME\nHW:403\nChip: 950")
 
 		csNew, csOld := motronic.BMW403C950Checksum(buf, true)
+		corrNeeded = (csNew != csOld)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
@@ -105,12 +110,23 @@ func main() {
 		color.Blue("BMW DME\nHW: 405\nChip: 951")
 
 		csNew, csOld := motronic.BMW405C951Checksum(buf, true)
+		corrNeeded = (csNew != csOld)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
 
+	// Check if firmware is detected correctly
 	if !found {
 		color.Red("Unsupported firmware file")
+
+		// Delay exiting
+		time.Sleep(2 * time.Second)
+		return
+	}
+
+	// Check if correction is needed
+	if !corrNeeded {
+		color.Green("No checksum correction needed!\n")
 
 		// Delay exiting
 		time.Sleep(2 * time.Second)
