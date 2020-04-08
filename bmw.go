@@ -141,9 +141,8 @@ func BMW402C098Checksum(buf []byte, patch bool) (uint16, uint16) {
 
 	// Patch buffer
 	if patch {
-
+		PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
 	}
-	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
 
 	return sum, checksumStored
 }
