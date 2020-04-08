@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"time"
 
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
@@ -19,6 +20,9 @@ func main() {
 
 	if len(args) == 0 {
 		color.Red("Please input path to file")
+
+		// Delay exiting
+		time.Sleep(time.Second)
 		return
 	}
 
@@ -70,6 +74,9 @@ func main() {
 
 	if !found {
 		color.Red("Unsupported firmware file")
+
+		// Delay exiting
+		time.Sleep(time.Second)
 		return
 	}
 
@@ -86,4 +93,7 @@ func main() {
 	}
 
 	color.Green("Done!\n")
+
+	// Delay exiting
+	time.Sleep(time.Second)
 }
