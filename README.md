@@ -1,6 +1,6 @@
 ## Bosch Motronic checksum correction tool
 
-Cross-platform checksum correction tool for Bosch Motronic ECUs.
+Cross-platform checksum correction tool for Bosch Motronic ECUs. Supported firmware auto recognition built-in.
 
 #### Supported ECUs:
 
@@ -17,9 +17,9 @@ Cross-platform checksum correction tool for Bosch Motronic ECUs.
     make build
     ```
 
-2. Use it to correct checksums
+2. Use it to correct checksums. It will ask for input file. File can be dragged into command window. Tool will overwrite input file.
     ```
-    motronic_checksum 403_mod.bin
+    motronic_checksum
     ```
 
 #### Test:
