@@ -64,55 +64,58 @@ func main() {
 
 	found := false
 	corrNeeded := false
+	romSize := len(buf)
 
-	if err = motronic.BMW402C098Validate(buf); err == nil {
-		found = true
-		color.Blue("BMW DME\nHW: 402\nChip: 098")
+	if romSize == 0x8000 {
+		// ECU with ROM size 0x8000
 
-		csNew, csOld := motronic.BMW402C098Checksum(buf, true)
-		corrNeeded = (csNew != csOld)
+		if err = motronic.BMW402C098Validate(buf); err == nil {
+			found = true
+			color.Blue("BMW DME\nHW: 402\nChip: 098")
 
-		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
-	}
+			csNew, csOld := motronic.BMW402C098Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
 
-	if err = motronic.BMW402C599Validate(buf); !found && err == nil {
-		found = true
-		color.Blue("BMW DME\nHW: 402\nChip: 599")
+			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+		} else if err = motronic.BMW402C599Validate(buf); !found && err == nil {
+			found = true
+			color.Blue("BMW DME\nHW: 402\nChip: 599")
 
-		csNew, csOld := motronic.BMW402C599Checksum(buf, true)
-		corrNeeded = (csNew != csOld)
+			csNew, csOld := motronic.BMW402C599Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
 
-		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
-	}
+			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+		} else if err = motronic.BMW403Validate(buf); !found && err == nil {
+			found = true
+			color.Blue("BMW DME\nHW: 403\nChip: TBC")
 
-	if err = motronic.BMW403Validate(buf); !found && err == nil {
-		found = true
-		color.Blue("BMW DME\nHW: 403\nChip: TBC")
+			csNew, csOld := motronic.BMW403Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
 
-		csNew, csOld := motronic.BMW403Checksum(buf, true)
-		corrNeeded = (csNew != csOld)
+			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+		} else if err = motronic.BMW403C950Validate(buf); !found && err == nil {
+			found = true
+			color.Blue("BMW DME\nHW:403\nChip: 950")
 
-		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
-	}
+			csNew, csOld := motronic.BMW403C950Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
 
-	if err = motronic.BMW403C950Validate(buf); !found && err == nil {
-		found = true
-		color.Blue("BMW DME\nHW:403\nChip: 950")
+			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+		}
+	} else if romSize == 0x10000 {
+		// ECU with ROM size 0x10000
 
-		csNew, csOld := motronic.BMW403C950Checksum(buf, true)
-		corrNeeded = (csNew != csOld)
+		if err = motronic.BMW405C951Validate(buf); !found && err == nil {
+			found = true
+			color.Blue("BMW DME\nHW: 405\nChip: 951")
 
-		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
-	}
+			csNew, csOld := motronic.BMW405C951Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
 
-	if err = motronic.BMW405C951Validate(buf); !found && err == nil {
-		found = true
-		color.Blue("BMW DME\nHW: 405\nChip: 951")
-
-		csNew, csOld := motronic.BMW405C951Checksum(buf, true)
-		corrNeeded = (csNew != csOld)
-
-		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+		}
+	} else {
+		color.Red("Unsupported firmware file size")
 	}
 
 	// Check if firmware is detected correctly
