@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// Note: All tests should be performed on original binary files
+// Note: All tests should be performed against original binary files
 
 func TestBMW402C098Checksum(t *testing.T) {
 	file, err := os.Open("./firmwares/402_ori.bin")
@@ -27,7 +27,7 @@ func TestBMW402C098Checksum(t *testing.T) {
 		return
 	}
 
-	sum := BMW402C098Checksum(buf)
+	sum, _ := BMW402C098Checksum(buf)
 	if sum != 0xF7E7 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xF7E7, sum)
 	}
@@ -52,7 +52,7 @@ func TestBMW402C599Checksum(t *testing.T) {
 		return
 	}
 
-	sum := BMW402C599Checksum(buf)
+	sum, _ := BMW402C599Checksum(buf)
 	if sum != 0x0985 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0x0985, sum)
 	}
@@ -77,7 +77,7 @@ func TestBMW403Checksum(t *testing.T) {
 		return
 	}
 
-	sum := BMW403Checksum(buf)
+	sum, _ := BMW403Checksum(buf)
 	if sum != 0xBD68 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xBD68, sum)
 	}
@@ -102,7 +102,7 @@ func TestBMW403C950Checksum(t *testing.T) {
 		return
 	}
 
-	sum := BMW403C950Checksum(buf)
+	sum, _ := BMW403C950Checksum(buf)
 	if sum != 0xC7A9 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xC7A9, sum)
 	}
@@ -127,7 +127,7 @@ func TestBMW405C951Checksum(t *testing.T) {
 		return
 	}
 
-	sum := BMW405C951Checksum(buf)
+	sum, _ := BMW405C951Checksum(buf)
 	if sum != 0xCFAF {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xCFAF, sum)
 	}

@@ -65,33 +65,48 @@ func main() {
 	found := false
 
 	if err = motronic.BMW402C098Validate(buf); err == nil {
-		color.Blue("BMW DME\nHW: 402\nChip: 098")
 		found = true
-		motronic.BMW402C098Checksum(buf)
+		color.Blue("BMW DME\nHW: 402\nChip: 098")
+
+		csNew, csOld := motronic.BMW402C098Checksum(buf)
+
+		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
 
 	if err = motronic.BMW402C599Validate(buf); !found && err == nil {
-		color.Blue("BMW DME\nHW: 402\nChip: 599")
 		found = true
-		motronic.BMW402C599Checksum(buf)
+		color.Blue("BMW DME\nHW: 402\nChip: 599")
+
+		csNew, csOld := motronic.BMW402C599Checksum(buf)
+
+		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
 
 	if err = motronic.BMW403Validate(buf); !found && err == nil {
-		color.Blue("BMW DME\nHW: 403\nChip: TBC")
 		found = true
-		motronic.BMW403Checksum(buf)
+		color.Blue("BMW DME\nHW: 403\nChip: TBC")
+
+		csNew, csOld := motronic.BMW403Checksum(buf)
+
+		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
 
 	if err = motronic.BMW403C950Validate(buf); !found && err == nil {
-		color.Blue("BMW DME\nHW:403\nChip: 950")
-		motronic.BMW403C950Checksum(buf)
 		found = true
+		color.Blue("BMW DME\nHW:403\nChip: 950")
+
+		csNew, csOld := motronic.BMW403C950Checksum(buf)
+
+		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
 
 	if err = motronic.BMW405C951Validate(buf); !found && err == nil {
-		color.Blue("BMW DME\nHW: 405\nChip: 951")
 		found = true
-		motronic.BMW405C951Checksum(buf)
+		color.Blue("BMW DME\nHW: 405\nChip: 951")
+
+		csNew, csOld := motronic.BMW405C951Checksum(buf)
+
+		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
 
 	if !found {

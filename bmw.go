@@ -126,7 +126,7 @@ func BMW405C951Validate(buf []byte) error {
 }
 
 // BMW402C098Checksum calculates checksum for ECU with code ending 402 and chip ending with 098
-func BMW402C098Checksum(buf []byte) uint16 {
+func BMW402C098Checksum(buf []byte) (uint16, uint16) {
 	const (
 		reg1Start = 0x6AFE
 		reg1End   = 0x7B15
@@ -139,16 +139,14 @@ func BMW402C098Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
-
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
 
-	return sum
+	return sum, checksumStored
 }
 
 // BMW402C599Checksum calculates checksum for ECU with code ending 402 and chip ending with 599
-func BMW402C599Checksum(buf []byte) uint16 {
+func BMW402C599Checksum(buf []byte) (uint16, uint16) {
 	const (
 		reg1Start = 0x6AFE
 		reg1End   = 0x7B31
@@ -161,16 +159,14 @@ func BMW402C599Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
-
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
 
-	return sum
+	return sum, checksumStored
 }
 
 // BMW403Checksum calculates checksum for ECU with code ending 403
-func BMW403Checksum(buf []byte) uint16 {
+func BMW403Checksum(buf []byte) (uint16, uint16) {
 	const (
 		reg1Start = 0x69FE
 		reg1End   = 0x797F
@@ -183,16 +179,14 @@ func BMW403Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
-
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
 
-	return sum
+	return sum, checksumStored
 }
 
 // BMW403C950Checksum calculates checksum for ECU with code ending 403 and chip ending with 950
-func BMW403C950Checksum(buf []byte) uint16 {
+func BMW403C950Checksum(buf []byte) (uint16, uint16) {
 	const (
 		reg1Start = 0x69FE
 		reg1End   = 0x799B
@@ -205,16 +199,14 @@ func BMW403C950Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
-
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
 
-	return sum
+	return sum, checksumStored
 }
 
 // BMW405C951Checksum calculates checksum for ECU with code ending 405 and chip ending 951
-func BMW405C951Checksum(buf []byte) uint16 {
+func BMW405C951Checksum(buf []byte) (uint16, uint16) {
 	const (
 		reg1Start = 0x69FE
 		reg1End   = 0x799B
@@ -227,10 +219,8 @@ func BMW405C951Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
-
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
 
-	return sum
+	return sum, checksumStored
 }
