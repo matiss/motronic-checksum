@@ -15,12 +15,18 @@ Cross-platform checksum correction tool for Bosch Motronic ECUs. Supported firmw
 1. Build tool
     ```
     make build
+    make build-windows
+    make build-linux
     ```
 
 2. Use it to correct checksums. It will ask for input file. File can be dragged into command window. Tool will overwrite input file.
     ```
     motronic_checksum
     ```
+
+#### Downloads:
+Latest platform specific pre-compiled binaries can be downloaded under [releases](https://github.com/matiss/motronic-checksum/releases) section
+
 
 #### Test:
 
