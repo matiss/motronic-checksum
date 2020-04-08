@@ -15,7 +15,8 @@ const infoText = `
 Motronic Checksum Correction Tool
 ---------------------------------
 
-All bugs and issue should be reported at https://github.com/matiss/motronic_checksum/issues
+All bugs and issues should be reported at https://github.com/matiss/motronic-checksum/issues
+
 Created by Matiss Kiris
 
 ---------------------------------

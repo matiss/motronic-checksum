@@ -1,4 +1,4 @@
-module github.com/matiss/motronic_checksum
+module github.com/matiss/motronic-checksum
 
 go 1.14
 
