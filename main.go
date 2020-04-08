@@ -85,10 +85,10 @@ func main() {
 		found = true
 	}
 
-	if err = BMW405Validate(buf); !found && err == nil {
-		color.Blue("BMW DME\nHW: 405")
+	if err = BMW405C951Validate(buf); !found && err == nil {
+		color.Blue("BMW DME\nHW: 405\nChip: 951")
 		found = true
-		// WIP
+		BMW405C951Checksum(buf)
 	}
 
 	if !found {

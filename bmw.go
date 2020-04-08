@@ -101,8 +101,8 @@ func BMW403C950Validate(buf []byte) error {
 	return nil
 }
 
-// BMW405Validate validates ECU with code ending 403
-func BMW405Validate(buf []byte) error {
+// BMW405C951Validate validates ECU with code ending 405 and chip ending 951
+func BMW405C951Validate(buf []byte) error {
 	// Validate length
 	if len(buf) != 0x10000 {
 		return fmt.Errorf("Invalid file length")
@@ -110,7 +110,7 @@ func BMW405Validate(buf []byte) error {
 
 	const (
 		reg1Start = 0x69FE
-		reg1End   = 0x797F
+		reg1End   = 0x799B
 	)
 
 	// Validate Data Region 1
@@ -118,7 +118,7 @@ func BMW405Validate(buf []byte) error {
 		return fmt.Errorf("Invalid start of Data Region 1")
 	}
 
-	if buf[reg1End] != 0x4F || buf[reg1End-1] != 0x13 || buf[reg1End-2] != 0x22 || buf[reg1End-3] != 0x40 {
+	if buf[reg1End] != 0x48 || buf[reg1End-1] != 0x53 || buf[reg1End-2] != 0xA1 || buf[reg1End-3] != 0x45 {
 		return fmt.Errorf("Invalid end of Data Region 1")
 	}
 
@@ -191,8 +191,24 @@ func BMW403Checksum(buf []byte) uint16 {
 	return sum
 }
 
-// BMW405Checksum calculates checksum for ECU with code ending 405
-func BMW405Checksum(buf []byte) uint16 {
-	// WIP
-	return 0
+// BMW405C951Checksum calculates checksum for ECU with code ending 405 and chip ending 951
+func BMW405C951Checksum(buf []byte) uint16 {
+	const (
+		reg1Start = 0x69FE
+		reg1End   = 0x799B
+		reg1Store = 0x799C
+	)
+
+	// Big Endian
+	checksumStored := uint16((uint16(buf[reg1Store]) << 8) | uint16(buf[reg1Store+1]))
+
+	// Calculate new checksum
+	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
+
+	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
+
+	// Patch buffer
+	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
+
+	return sum
 }
