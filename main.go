@@ -82,6 +82,7 @@ func main() {
 
 	if err = BMW403C950Validate(buf); !found && err == nil {
 		color.Blue("BMW DME\nHW:403\nChip: 950")
+		BMW403C950Checksum(buf)
 		found = true
 	}
 
