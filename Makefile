@@ -23,19 +23,19 @@ build:
 	-@$(ECHO) "\n\033[0;35m%%% Building tools\033[0m"
 	-@$(ECHO) "Building..."
 	CGO_ENABLED=0 go build $(LDFLAGS) -v -o ./dist/$(PACKAGE_NAME)_macos $(SRCS)
-	-@$(ECHO) "\n\033[1;32mDone!\033[0;32m\nDone!\033[0m\n"
+	-@$(ECHO) "\n\033[1;32mDone!\033[0m\n"
 
 build-windows:
 	-@$(ECHO) "\n\033[0;35m%%% Building tools for Windows\033[0m"
 	-@$(ECHO) "Building.."
 	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build $(LDFLAGS) -v -o ./dist/$(PACKAGE_NAME).exe $(SRCS)
-	-@$(ECHO) "\n\033[1;32mDone!\033[0;32m\nDone!\033[0m\n"
+	-@$(ECHO) "\n\033[1;32mDone!\033[0m\n"
 
 build-linux:
 	-@$(ECHO) "\n\033[0;35m%%% Building tools for Linux\033[0m"
 	-@$(ECHO) "Building.."
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build $(LDFLAGS) -v -o ./dist/$(PACKAGE_NAME)_linux $(SRCS)
-	-@$(ECHO) "\n\033[1;32mDone!\033[0;32m\nDone!\033[0m\n"
+	-@$(ECHO) "\n\033[1;32mDone!\033[0m\n"
 
 run:
 	go run ./main.go
