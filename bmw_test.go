@@ -1,4 +1,4 @@
-package main
+package motronic
 
 import (
 	"io/ioutil"

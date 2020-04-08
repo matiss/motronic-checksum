@@ -15,7 +15,7 @@ PACKAGE_NAME=motronic_checksum
 BUILD=$(shell git rev-list --count HEAD)
 LDFLAGS=-ldflags '-w -s -v'
 
-SRCS=./*.go
+SRCS=./cmd/motronic/*.go
 
 default: build
 
@@ -28,17 +28,17 @@ build:
 build-windows:
 	-@$(ECHO) "\n\033[0;35m%%% Building tools for Windows\033[0m"
 	-@$(ECHO) "Building.."
-	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build $(LDFLAGS) -v -o ./dist/$(PACKAGE_NAME).exe $(SRCS)
+	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build $(LDFLAGS) -v -o ./dist/$(PACKAGE_NAME)_win64.exe $(SRCS)
 	-@$(ECHO) "\n\033[1;32mDone!\033[0m\n"
 
 build-linux:
 	-@$(ECHO) "\n\033[0;35m%%% Building tools for Linux\033[0m"
 	-@$(ECHO) "Building.."
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build $(LDFLAGS) -v -o ./dist/$(PACKAGE_NAME)_linux $(SRCS)
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build $(LDFLAGS) -v -o ./dist/$(PACKAGE_NAME)_linux64 $(SRCS)
 	-@$(ECHO) "\n\033[1;32mDone!\033[0m\n"
 
 run:
-	go run ./main.go
+	go run ./cmd/motronic/main.go
 
 test:
 	-@$(ECHO) "\n\033[0;35m%%% Running tests\033[0m"

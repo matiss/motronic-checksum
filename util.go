@@ -1,4 +1,4 @@
-package main
+package motronic
 
 // SimpleSum16bit
 func SimpleSum16bit(initial uint32, start int, end int, buf []byte) uint16 {
