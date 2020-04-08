@@ -11,6 +11,17 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
+const infoText = `
+Motronic Checksum Correction Tool
+---------------------------------
+
+All bugs and issue should be reported at https://github.com/matiss/motronic_checksum/issues
+Created by Matiss Kiris
+
+---------------------------------
+
+`
+
 func main() {
 	validate := func(input string) error {
 		if len(input) < 3 {
@@ -24,6 +35,8 @@ func main() {
 		Validate: validate,
 		Default:  "",
 	}
+
+	fmt.Printf(infoText)
 
 	filePath, err := prompt.Run()
 	if err != nil {
