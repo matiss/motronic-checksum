@@ -7,7 +7,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
 	"github.com/matiss/motronic-checksum/v1"
 )
@@ -71,56 +70,56 @@ func main() {
 
 		if err = motronic.BMW402C098Validate(buf); err == nil {
 			found = true
-			color.Blue("BMW DME\nHW: 402\nChip: 098")
+			fmt.Printf("BMW DME\nHW: 0 261 200 402\nSW: 098\n")
 
 			csNew, csOld := motronic.BMW402C098Checksum(buf, true)
 			corrNeeded = (csNew != csOld)
 
-			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		} else if err = motronic.BMW402C599Validate(buf); !found && err == nil {
 			found = true
-			color.Blue("BMW DME\nHW: 402\nChip: 599")
+			fmt.Printf("BMW DME\nHW: 0 261 200 402\nSW: 599\n")
 
 			csNew, csOld := motronic.BMW402C599Checksum(buf, true)
 			corrNeeded = (csNew != csOld)
 
-			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		} else if err = motronic.BMW403Validate(buf); !found && err == nil {
 			found = true
-			color.Blue("BMW DME\nHW: 403\nChip: TBC")
+			fmt.Printf("BMW DME\nHW: 0 261 200 403\nSW: TBC\n")
 
 			csNew, csOld := motronic.BMW403Checksum(buf, true)
 			corrNeeded = (csNew != csOld)
 
-			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		} else if err = motronic.BMW403C950Validate(buf); !found && err == nil {
 			found = true
-			color.Blue("BMW DME\nHW:403\nChip: 950")
+			fmt.Printf("BMW DME\nHW: 0 261 200 403\nSW: 950\n")
 
 			csNew, csOld := motronic.BMW403C950Checksum(buf, true)
 			corrNeeded = (csNew != csOld)
 
-			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		}
 	} else if romSize == 0x10000 {
 		// ECU with ROM size 0x10000
 
 		if err = motronic.BMW405C951Validate(buf); !found && err == nil {
 			found = true
-			color.Blue("BMW DME\nHW: 405\nChip: 951")
+			fmt.Printf("BMW DME\nHW: 0 261 200 405\nSW: 951\n")
 
 			csNew, csOld := motronic.BMW405C951Checksum(buf, true)
 			corrNeeded = (csNew != csOld)
 
-			fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		}
 	} else {
-		color.Red("Unsupported firmware file size")
+		fmt.Printf("Invalid file size\n")
 	}
 
 	// Check if firmware is detected correctly
 	if !found {
-		color.Red("Unsupported firmware file")
+		fmt.Printf("Unsupported firmware file\n")
 
 		// Delay exiting
 		time.Sleep(2 * time.Second)
@@ -129,7 +128,7 @@ func main() {
 
 	// Check if correction is needed
 	if !corrNeeded {
-		color.Green("No checksum correction needed!\n")
+		fmt.Printf("No checksum correction needed!\n")
 
 		// Delay exiting
 		time.Sleep(2 * time.Second)
@@ -153,7 +152,7 @@ func main() {
 		return
 	}
 
-	color.Green("Done!\n")
+	fmt.Printf("Done!\n")
 
 	// Delay exiting
 	time.Sleep(1 * time.Second)
