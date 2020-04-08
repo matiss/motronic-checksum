@@ -27,7 +27,7 @@ func TestBMW402C098Checksum(t *testing.T) {
 		return
 	}
 
-	sum, _ := BMW402C098Checksum(buf)
+	sum, _ := BMW402C098Checksum(buf, false)
 	if sum != 0xF7E7 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xF7E7, sum)
 	}
@@ -52,7 +52,7 @@ func TestBMW402C599Checksum(t *testing.T) {
 		return
 	}
 
-	sum, _ := BMW402C599Checksum(buf)
+	sum, _ := BMW402C599Checksum(buf, false)
 	if sum != 0x0985 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0x0985, sum)
 	}
@@ -77,7 +77,7 @@ func TestBMW403Checksum(t *testing.T) {
 		return
 	}
 
-	sum, _ := BMW403Checksum(buf)
+	sum, _ := BMW403Checksum(buf, false)
 	if sum != 0xBD68 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xBD68, sum)
 	}
@@ -102,7 +102,7 @@ func TestBMW403C950Checksum(t *testing.T) {
 		return
 	}
 
-	sum, _ := BMW403C950Checksum(buf)
+	sum, _ := BMW403C950Checksum(buf, false)
 	if sum != 0xC7A9 {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xC7A9, sum)
 	}
@@ -127,7 +127,7 @@ func TestBMW405C951Checksum(t *testing.T) {
 		return
 	}
 
-	sum, _ := BMW405C951Checksum(buf)
+	sum, _ := BMW405C951Checksum(buf, false)
 	if sum != 0xCFAF {
 		t.Errorf("Checksum failed, expected: %X got: %X", 0xCFAF, sum)
 	}

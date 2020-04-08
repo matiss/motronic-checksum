@@ -68,7 +68,7 @@ func main() {
 		found = true
 		color.Blue("BMW DME\nHW: 402\nChip: 098")
 
-		csNew, csOld := motronic.BMW402C098Checksum(buf)
+		csNew, csOld := motronic.BMW402C098Checksum(buf, true)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
@@ -77,7 +77,7 @@ func main() {
 		found = true
 		color.Blue("BMW DME\nHW: 402\nChip: 599")
 
-		csNew, csOld := motronic.BMW402C599Checksum(buf)
+		csNew, csOld := motronic.BMW402C599Checksum(buf, true)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
@@ -86,7 +86,7 @@ func main() {
 		found = true
 		color.Blue("BMW DME\nHW: 403\nChip: TBC")
 
-		csNew, csOld := motronic.BMW403Checksum(buf)
+		csNew, csOld := motronic.BMW403Checksum(buf, true)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
@@ -95,7 +95,7 @@ func main() {
 		found = true
 		color.Blue("BMW DME\nHW:403\nChip: 950")
 
-		csNew, csOld := motronic.BMW403C950Checksum(buf)
+		csNew, csOld := motronic.BMW403C950Checksum(buf, true)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
@@ -104,7 +104,7 @@ func main() {
 		found = true
 		color.Blue("BMW DME\nHW: 405\nChip: 951")
 
-		csNew, csOld := motronic.BMW405C951Checksum(buf)
+		csNew, csOld := motronic.BMW405C951Checksum(buf, true)
 
 		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
 	}
