@@ -2,18 +2,19 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
 	"io/ioutil"
 	"os"
-)
 
-const (
-	regionStart  = 0x69FE
-	regionEnd    = 0x797F
-	storeAddress = 0x7980
+	"github.com/fatih/color"
+	"github.com/manifoldco/promptui"
 )
 
 func main() {
+	prompt := promptui.Prompt{
+		Label:     "Save to file",
+		IsConfirm: true,
+	}
+
 	args := os.Args[1:]
 
 	if len(args) == 0 {
@@ -23,7 +24,7 @@ func main() {
 
 	filePath := args[0]
 
-	file, err := os.Open(filePath)
+	file, err := os.OpenFile(filePath, os.O_RDWR, 0644)
 	defer file.Close()
 	if err != nil {
 		fmt.Println(err)
@@ -51,7 +52,7 @@ func main() {
 	}
 
 	if err = BMW403Validate(buf); !found && err == nil {
-		color.Blue("BMW DMW\nHW: 403\nChip: TBC")
+		color.Blue("BMW DME\nHW: 403\nChip: TBC")
 		found = true
 		BMW403Checksum(buf)
 	}
@@ -68,12 +69,17 @@ func main() {
 	}
 
 	if !found {
-		color.Red("Unsupported binary file")
+		color.Red("Unsupported firmware file")
 		return
 	}
 
-	// Write output file
-	err = ioutil.WriteFile("corrected.bin", buf, 0644)
+	_, err = prompt.Run()
+	if err != nil {
+		return
+	}
+
+	// Overwrite file
+	_, err = file.WriteAt(buf, 0) // Write at 0 beginning
 	if err != nil {
 		fmt.Println(err)
 		return

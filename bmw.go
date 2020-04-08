@@ -139,7 +139,7 @@ func BMW402C098Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Old: %X New: %X\n", checksumStored, sum)
+	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
 
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
@@ -161,7 +161,7 @@ func BMW402C599Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Old: %X New: %X\n", checksumStored, sum)
+	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
 
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
@@ -183,7 +183,7 @@ func BMW403Checksum(buf []byte) uint16 {
 	// Calculate new checksum
 	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
 
-	fmt.Printf("Old: %X New: %X\n", checksumStored, sum)
+	fmt.Printf("Checksum old: %X new: %X\n", checksumStored, sum)
 
 	// Patch buffer
 	PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
