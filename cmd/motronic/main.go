@@ -70,7 +70,7 @@ func main() {
 
 		csNew, csOld := motronic.BMW402C098Checksum(buf, true)
 
-		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
+		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
 
 	if err = motronic.BMW402C599Validate(buf); !found && err == nil {
@@ -79,7 +79,7 @@ func main() {
 
 		csNew, csOld := motronic.BMW402C599Checksum(buf, true)
 
-		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
+		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
 
 	if err = motronic.BMW403Validate(buf); !found && err == nil {
@@ -88,7 +88,7 @@ func main() {
 
 		csNew, csOld := motronic.BMW403Checksum(buf, true)
 
-		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
+		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
 
 	if err = motronic.BMW403C950Validate(buf); !found && err == nil {
@@ -97,7 +97,7 @@ func main() {
 
 		csNew, csOld := motronic.BMW403C950Checksum(buf, true)
 
-		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
+		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
 
 	if err = motronic.BMW405C951Validate(buf); !found && err == nil {
@@ -106,7 +106,7 @@ func main() {
 
 		csNew, csOld := motronic.BMW405C951Checksum(buf, true)
 
-		fmt.Printf("Checksum old: %X new: %X\n", csNew, csOld)
+		fmt.Printf("Checksum old: %X new: %X\n", csOld, csNew)
 	}
 
 	if !found {
