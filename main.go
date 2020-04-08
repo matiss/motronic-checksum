@@ -30,7 +30,7 @@ func main() {
 		fmt.Printf("Prompt failed %v\n", err)
 
 		// Delay exiting
-		time.Sleep(time.Second)
+		time.Sleep(2 * time.Second)
 		return
 	}
 
@@ -82,7 +82,7 @@ func main() {
 		color.Red("Unsupported firmware file")
 
 		// Delay exiting
-		time.Sleep(time.Second)
+		time.Sleep(2 * time.Second)
 		return
 	}
 
@@ -106,5 +106,5 @@ func main() {
 	color.Green("Done!\n")
 
 	// Delay exiting
-	time.Sleep(time.Second)
+	time.Sleep(2 * time.Second)
 }
