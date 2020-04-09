@@ -202,8 +202,8 @@ func TestBMW413C715Checksum(t *testing.T) {
 		return
 	}
 
-	sum, sumOld := BMW413C715Checksum(buf, false)
+	sum, _ := BMW413C715Checksum(buf, false)
 	if sum != 0xE76E {
-		t.Errorf("Checksum failed, expected: %X got: %X old: %X", 0xE76E, sum, sumOld)
+		t.Errorf("Checksum failed, expected: %X got: %X", 0xE76E, sum)
 	}
 }
