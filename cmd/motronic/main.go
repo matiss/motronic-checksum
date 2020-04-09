@@ -120,6 +120,22 @@ func main() {
 			corrNeeded = (csNew != csOld)
 
 			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
+		} else if err = motronic.BMW413C623Validate(buf); err == nil {
+			found = true
+			fmt.Printf("BMW DME\nHW: 0 261 200 413\nSW: 623\n")
+
+			csNew, csOld := motronic.BMW413C623Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
+
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
+		} else if err = motronic.BMW413C715Validate(buf); err == nil {
+			found = true
+			fmt.Printf("BMW DME\nHW: 0 261 200 413\nSW: 715\n")
+
+			csNew, csOld := motronic.BMW413C715Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
+
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		}
 	} else {
 		fmt.Printf("Invalid file size\n")
