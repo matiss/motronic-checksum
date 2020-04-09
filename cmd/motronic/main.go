@@ -68,7 +68,15 @@ func main() {
 	if romSize == 0x8000 {
 		// ECU with ROM size 0x8000
 
-		if err = motronic.BMW402C098Validate(buf); err == nil {
+		if err = motronic.BMW173Validate(buf); err == nil {
+			found = true
+			fmt.Printf("BMW DME\nHW: 0 261 200 173\nSW: TBC\n")
+
+			csNew, csOld := motronic.BMW173Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
+
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
+		} else if err = motronic.BMW402C098Validate(buf); err == nil {
 			found = true
 			fmt.Printf("BMW DME\nHW: 0 261 200 402\nSW: 098\n")
 
@@ -76,7 +84,7 @@ func main() {
 			corrNeeded = (csNew != csOld)
 
 			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
-		} else if err = motronic.BMW402C599Validate(buf); !found && err == nil {
+		} else if err = motronic.BMW402C599Validate(buf); err == nil {
 			found = true
 			fmt.Printf("BMW DME\nHW: 0 261 200 402\nSW: 599\n")
 
@@ -84,7 +92,7 @@ func main() {
 			corrNeeded = (csNew != csOld)
 
 			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
-		} else if err = motronic.BMW403Validate(buf); !found && err == nil {
+		} else if err = motronic.BMW403Validate(buf); err == nil {
 			found = true
 			fmt.Printf("BMW DME\nHW: 0 261 200 403\nSW: TBC\n")
 
@@ -92,7 +100,7 @@ func main() {
 			corrNeeded = (csNew != csOld)
 
 			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
-		} else if err = motronic.BMW403C950Validate(buf); !found && err == nil {
+		} else if err = motronic.BMW403C950Validate(buf); err == nil {
 			found = true
 			fmt.Printf("BMW DME\nHW: 0 261 200 403\nSW: 950\n")
 
@@ -104,7 +112,7 @@ func main() {
 	} else if romSize == 0x10000 {
 		// ECU with ROM size 0x10000
 
-		if err = motronic.BMW405C951Validate(buf); !found && err == nil {
+		if err = motronic.BMW405C951Validate(buf); err == nil {
 			found = true
 			fmt.Printf("BMW DME\nHW: 0 261 200 405\nSW: 951\n")
 
