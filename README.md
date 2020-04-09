@@ -33,7 +33,7 @@ Latest platform specific pre-compiled binaries can be downloaded under [releases
 
 #### Test:
 
-Before running unit tests make sure you have necessary original firmware version inside firmwares directory
+Before running unit tests make sure you have necessary original firmware version inside firmwares directory. ROMs can be downloaded [here](https://www.dropbox.com/sh/qu1wczxnzd9drvk/AADmLUiWUOisuy1loi7v8-Kka?dl=0)
 ```
 make test
 ```
