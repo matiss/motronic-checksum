@@ -15,7 +15,7 @@ func BMW173Validate(buf []byte) error {
 		reg1Start = 0x0000
 		reg1End   = 0x1EFF
 		reg2Start = 0x2000
-		reg2End   = 0x8000
+		reg2End   = 0x7FFF
 	)
 
 	// Validate Data Region 1
