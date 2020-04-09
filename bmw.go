@@ -137,7 +137,7 @@ func BMW402C098Checksum(buf []byte, patch bool) (uint16, uint16) {
 	checksumStored := uint16((uint16(buf[reg1Store]) << 8) | uint16(buf[reg1Store+1]))
 
 	// Calculate new checksum
-	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
+	sum := Checksum16bit(0, reg1Start, reg1End, buf)
 
 	// Patch buffer
 	if patch {
@@ -159,7 +159,7 @@ func BMW402C599Checksum(buf []byte, patch bool) (uint16, uint16) {
 	checksumStored := uint16((uint16(buf[reg1Store]) << 8) | uint16(buf[reg1Store+1]))
 
 	// Calculate new checksum
-	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
+	sum := Checksum16bit(0, reg1Start, reg1End, buf)
 
 	// Patch buffer
 	if patch {
@@ -181,7 +181,7 @@ func BMW403Checksum(buf []byte, patch bool) (uint16, uint16) {
 	checksumStored := uint16((uint16(buf[reg1Store]) << 8) | uint16(buf[reg1Store+1]))
 
 	// Calculate new checksum
-	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
+	sum := Checksum16bit(0, reg1Start, reg1End, buf)
 
 	// Patch buffer
 	if patch {
@@ -203,7 +203,7 @@ func BMW403C950Checksum(buf []byte, patch bool) (uint16, uint16) {
 	checksumStored := uint16((uint16(buf[reg1Store]) << 8) | uint16(buf[reg1Store+1]))
 
 	// Calculate new checksum
-	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
+	sum := Checksum16bit(0, reg1Start, reg1End, buf)
 
 	// Patch buffer
 	if patch {
@@ -225,7 +225,7 @@ func BMW405C951Checksum(buf []byte, patch bool) (uint16, uint16) {
 	checksumStored := uint16((uint16(buf[reg1Store]) << 8) | uint16(buf[reg1Store+1]))
 
 	// Calculate new checksum
-	sum := SimpleSum16bit(0, reg1Start, reg1End, buf)
+	sum := Checksum16bit(0, reg1Start, reg1End, buf)
 
 	// Patch buffer
 	if patch {

@@ -1,7 +1,7 @@
 package motronic
 
-// SimpleSum16bit
-func SimpleSum16bit(initial uint32, start int, end int, buf []byte) uint16 {
+// Checksum16bit
+func Checksum16bit(initial uint32, start int, end int, buf []byte) uint16 {
 	var sum uint32 = initial
 
 	for i := start; i <= end; i += 1 {
