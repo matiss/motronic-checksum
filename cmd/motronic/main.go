@@ -70,7 +70,7 @@ func main() {
 
 		if err = motronic.BMW173Validate(buf); err == nil {
 			found = true
-			fmt.Printf("BMW DME\nHW: 0 261 200 173\nSW: TBC\n")
+			fmt.Printf("BMW DME\nHW: 0 261 200 173\nSW: 794\n")
 
 			csNew, csOld := motronic.BMW173Checksum(buf, true)
 			corrNeeded = (csNew != csOld)
