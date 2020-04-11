@@ -4,21 +4,12 @@ Cross-platform checksum correction tool for Bosch Motronic ECUs. Supported firmw
 
 #### Supported ECUs:
 
-- [x] BMW DME 0 261 200 173
-    * 794
-- [x] BMW DME 0 261 200 402
-    * 098
-    * 599
-- [x] BMW DME 0 261 200 403
-    * Unknown chip ID
-    * 950
-- [x] BMW DME 0 261 200 404
-    * 689
-- [X] BMW DME 0 261 200 405
-    * 951
-- [X] BMW DME 0 261 200 413
-    * 623
-    * 715
+- [x] BMW DME 0 261 200 173 (794)
+- [x] BMW DME 0 261 200 402 (098, 599)
+- [x] BMW DME 0 261 200 403 (Unknown chip ID, 950)
+- [x] BMW DME 0 261 200 404 (689)
+- [x] BMW DME 0 261 200 405 (951)
+- [x] BMW DME 0 261 200 413 (623, 715)
 
 Some of software versions might not be supported by this tool even though hardware codes are same. If you want to add support for some specific ROM, you can make a pull request or create a new issue ticket with hardware and software (chip) codes and link to original firmware/ROM.
 
