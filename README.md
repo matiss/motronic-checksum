@@ -7,7 +7,7 @@ Cross-platform checksum correction tool for Bosch Motronic ECUs. Supported firmw
 - [x] BMW DME 0 261 200 173
 - [x] BMW DME 0 261 200 402
 - [x] BMW DME 0 261 200 403
-- [ ] BMW DME 0 261 200 404
+- [x] BMW DME 0 261 200 404
 - [X] BMW DME 0 261 200 405
 - [X] BMW DME 0 261 200 413
 
