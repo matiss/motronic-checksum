@@ -10,6 +10,7 @@ Cross-platform checksum correction tool for Bosch Motronic ECUs. Supported firmw
 - [x] BMW DME 0 261 200 404 (689)
 - [x] BMW DME 0 261 200 405 (951)
 - [x] BMW DME 0 261 200 413 (623, 715)
+- [ ] BMW DME 0 261 200 484 
 
 Some of software versions might not be supported by this tool even though hardware codes are same. If you want to add support for some specific ROM, you can make a pull request or create a new issue ticket with hardware and software (chip) codes and link to original firmware/ROM.
 
@@ -28,6 +29,7 @@ Some of software versions might not be supported by this tool even though hardwa
     ```
 
 #### Downloads:
+
 Latest platform specific pre-compiled binaries can be downloaded under [releases](https://github.com/matiss/motronic-checksum/releases) section
 
 
@@ -42,3 +44,11 @@ Test coverage
 ```
 make coverage
 ```
+
+#### Coffee Support
+
+You can support me by buying me a [coffee](https://www.buymeacoffee.com/matiss)
+
+#### License
+
+Copyright (c) 2020-present [matiss](https://github.com/matiss). Motronic Checksum tool is free and open-source software licensed under the MIT License.
