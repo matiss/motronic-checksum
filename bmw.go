@@ -80,8 +80,8 @@ func BMW402C599Validate(buf []byte) error {
 	return nil
 }
 
-// BMW403Validate validates ECU with code ending 403
-func BMW403Validate(buf []byte) error {
+// BMW403C547Validate validates ECU with code ending 403 and chip number ending with C547
+func BMW403C547Validate(buf []byte) error {
 	// Validate length
 	if len(buf) != 0x8000 {
 		return fmt.Errorf("Invalid file length")
@@ -298,8 +298,8 @@ func BMW402C599Checksum(buf []byte, patch bool) (uint16, uint16) {
 	return sum, checksumStored
 }
 
-// BMW403Checksum calculates checksum for ECU with code ending 403
-func BMW403Checksum(buf []byte, patch bool) (uint16, uint16) {
+// BMW403C547Checksum calculates checksum for ECU with code ending 403 and chip ending with 547
+func BMW403C547Checksum(buf []byte, patch bool) (uint16, uint16) {
 	const (
 		reg1Start = 0x69FE
 		reg1End   = 0x797F
