@@ -183,6 +183,31 @@ func TestBMW405C951Checksum(t *testing.T) {
 	}
 }
 
+func TestBMW413C609Checksum(t *testing.T) {
+	file, err := os.Open("./firmwares/BMW/413C609_ori.bin")
+	defer file.Close()
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	buf, err := ioutil.ReadAll(file)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if err = BMW413C609Validate(buf); err != nil {
+		t.Errorf("Invalid test binary file")
+		return
+	}
+
+	sum, _ := BMW413C609Checksum(buf, false)
+	if sum != 0xE53A {
+		t.Errorf("Checksum failed, expected: %X got: %X", 0xE53A, sum)
+	}
+}
+
 func TestBMW413C623Checksum(t *testing.T) {
 	file, err := os.Open("./firmwares/BMW/413C623_ori.bin")
 	defer file.Close()
