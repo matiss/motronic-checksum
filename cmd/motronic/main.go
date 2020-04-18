@@ -152,7 +152,16 @@ func main() {
 			corrNeeded = (csNew != csOld)
 
 			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
+		} else if err = motronic.BMW484C582Validate(buf); err == nil {
+			found = true
+			fmt.Printf("BMW DME\nHW: 0 261 203 484\nSW: 582\n")
+
+			csNew, csOld := motronic.BMW484C582Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
+
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		}
+
 	} else {
 		fmt.Printf("Invalid file size\n")
 	}

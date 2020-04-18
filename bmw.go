@@ -248,6 +248,30 @@ func BMW413C715Validate(buf []byte) error {
 	return nil
 }
 
+// BMW484C582Validate validates ECU with code ending 484 and chip ending 582
+func BMW484C582Validate(buf []byte) error {
+	// Validate length
+	if len(buf) != 0x10000 {
+		return fmt.Errorf("Invalid file length")
+	}
+
+	const (
+		reg1Start = 0xDBFE
+		reg1End   = 0xED5F
+	)
+
+	// Validate Data Region 1
+	if buf[reg1Start] != 0x00 || buf[reg1Start+1] != 0x00 || buf[reg1Start+2] != 0x00 {
+		return fmt.Errorf("Invalid start of Data Region 1")
+	}
+
+	if buf[reg1End] != 0xEC || buf[reg1End-1] != 0x49 || buf[reg1End-2] != 0xEC || buf[reg1End-3] != 0x37 {
+		return fmt.Errorf("Invalid end of Data Region 1")
+	}
+
+	return nil
+}
+
 // BMW173Checksum calculates checksum for ECU with code ending 173
 func BMW173Checksum(buf []byte, patch bool) (uint16, uint16) {
 	const (
@@ -460,6 +484,28 @@ func BMW413C715Checksum(buf []byte, patch bool) (uint16, uint16) {
 		reg1Start = 0xD000
 		reg1End   = 0xE7C1
 		reg1Store = 0xE7C2
+	)
+
+	// Stored checksum
+	checksumStored := uint16((uint16(buf[reg1Store]) << 8) | uint16(buf[reg1Store+1]))
+
+	// Calculate new checksum
+	sum := Checksum16bit(0, reg1Start, reg1End, buf)
+
+	// Patch buffer
+	if patch {
+		PatchBuffer(reg1Store, []byte{byte(sum >> 8), byte(sum)}, buf)
+	}
+
+	return sum, checksumStored
+}
+
+// BMW484C582Checksum calculates checksum for ECU with code ending 484 and chip ending 582
+func BMW484C582Checksum(buf []byte, patch bool) (uint16, uint16) {
+	const (
+		reg1Start = 0xDBFE
+		reg1End   = 0xED5F
+		reg1Store = 0xED60
 	)
 
 	// Stored checksum
