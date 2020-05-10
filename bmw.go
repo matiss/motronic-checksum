@@ -286,13 +286,10 @@ func BMW173Checksum(buf []byte, patch bool) (uint16, uint16) {
 	checksumStored := uint16((uint16(buf[store]) << 8) | uint16(buf[store+1]))
 
 	// Calculate new checksum for region 1
-	sum1 := Checksum16bit(0, reg1Start, reg1End, buf)
+	sum := Checksum16bit(0xB51F, reg1Start, reg1End, buf)
 
 	// Calculate new checksum for region 2
-	sum2 := Checksum16bit(0, reg2Start, reg2End, buf)
-
-	// Calculate final checksum
-	sum := sum1 + sum2 + 0xB51F
+	sum = Checksum16bit(sum, reg2Start, reg2End, buf)
 
 	// Patch buffer
 	if patch {
