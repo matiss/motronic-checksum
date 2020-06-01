@@ -272,7 +272,7 @@ func BMW484C582Validate(buf []byte) error {
 	return nil
 }
 
-// BMW590C597Validate validates ECU with code ending 173
+// BMW590C597Validate validates ECU with code ending 597
 func BMW590C597Validate(buf []byte) error {
 	// Validate length
 	if len(buf) != 0x8000 {
