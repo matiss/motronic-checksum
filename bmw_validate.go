@@ -337,3 +337,36 @@ func BMW950C167Validate(buf []byte) error {
 
 	return nil
 }
+
+// BMW990C070Validate validates ECU with code ending 990 and chip ending 070
+func BMW990C070Validate(buf []byte) error {
+	// Validate length
+	if len(buf) != 0x8000 {
+		return fmt.Errorf("Invalid file length")
+	}
+
+	const (
+		hwStart   = 0x1F02
+		reg1Start = 0x0000
+		reg1End   = 0x1EFF
+		reg2Start = 0x2000
+		reg2End   = 0x7FFF
+	)
+
+	// Validate hardware number
+	if buf[hwStart] != 0x30 || buf[hwStart+1] != 0x39 || buf[hwStart+2] != 0x39 {
+		return fmt.Errorf("Invalid hardware number")
+	}
+
+	// Validate Data Region 1
+	if buf[reg1End] != 0x01 || buf[reg1End-1] != 0x23 || buf[reg1End-2] != 0x9F || buf[reg1End-3] != 0x03 {
+		return fmt.Errorf("Invalid end of Data Region 1")
+	}
+
+	// Validate Data Region 2
+	if buf[reg2Start] != 0x02 || buf[reg2Start+1] != 0x26 || buf[reg2Start+2] != 0xB0 || buf[reg2Start+3] != 0xFF {
+		return fmt.Errorf("Invalid start of Data Region 2")
+	}
+
+	return nil
+}

@@ -116,6 +116,14 @@ func main() {
 			corrNeeded = (csNew != csOld)
 
 			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
+		} else if err = motronic.BMW990C070Validate(buf); err == nil {
+			found = true
+			fmt.Printf("BMW DME\nHW: 0 261 200 990\nSW: 070\n")
+
+			csNew, csOld := motronic.BMW173Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
+
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
 		} else if err = motronic.BMW590C597Validate(buf); err == nil {
 			found = true
 			fmt.Printf("BMW DME\nHW: 0 261 203 590\nSW: 597\n")
