@@ -11,17 +11,19 @@ import (
 	"github.com/matiss/motronic-checksum/v1"
 )
 
-const infoText = `
-Motronic Checksum Correction Tool
----------------------------------
+func showInfo() {
+	fmt.Printf(`
+Motronic Checksum Correction Tool v%s
+-----------------------------------------
 
 All bugs and issues should be reported at https://github.com/matiss/motronic-checksum/issues
 
-Created by Matiss Kiris
+Created by @matiss. Licensed under the MIT License.
 
----------------------------------
+-----------------------------------------
 
-`
+`, motronic.Version)
+}
 
 func main() {
 	validate := func(input string) error {
@@ -37,7 +39,7 @@ func main() {
 		Default:  "",
 	}
 
-	fmt.Printf(infoText)
+	showInfo()
 
 	filePath, err := prompt.Run()
 	if err != nil {
