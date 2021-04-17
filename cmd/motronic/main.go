@@ -25,6 +25,8 @@ Created by @matiss. Licensed under the MIT License.
 `, motronic.Version)
 }
 
+const exitDealyS = 3
+
 func main() {
 	validate := func(input string) error {
 		if len(input) < 3 {
@@ -46,7 +48,7 @@ func main() {
 		fmt.Printf("Prompt failed %v\n", err)
 
 		// Delay exiting
-		time.Sleep(2 * time.Second)
+		time.Sleep(exitDealyS * time.Second)
 		return
 	}
 
@@ -204,7 +206,7 @@ func main() {
 		fmt.Printf("Unsupported firmware file\n")
 
 		// Delay exiting
-		time.Sleep(2 * time.Second)
+		time.Sleep(exitDealyS * time.Second)
 		return
 	}
 
@@ -213,7 +215,7 @@ func main() {
 		fmt.Printf("No checksum correction needed!\n")
 
 		// Delay exiting
-		time.Sleep(2 * time.Second)
+		time.Sleep(exitDealyS * time.Second)
 		return
 	}
 
@@ -237,5 +239,5 @@ func main() {
 	fmt.Printf("Done!\n")
 
 	// Delay exiting
-	time.Sleep(1 * time.Second)
+	time.Sleep(exitDealyS * time.Second)
 }
