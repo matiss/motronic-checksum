@@ -69,8 +69,15 @@ func main() {
 
 	if romSize == 0x8000 {
 		// ECU with ROM size 0x8000
+		if err = motronic.BMW157C165Validate(buf); err == nil {
+			found = true
+			fmt.Printf("BMW DME\nHW: 0 261 200 157\nSW: 165\n")
 
-		if err = motronic.BMW173Validate(buf); err == nil {
+			csNew, csOld := motronic.BMW173Checksum(buf, true)
+			corrNeeded = (csNew != csOld)
+
+			fmt.Printf("Checksum: %X -> %X\n", csOld, csNew)
+		} else if err = motronic.BMW173Validate(buf); err == nil {
 			found = true
 			fmt.Printf("BMW DME\nHW: 0 261 200 173\nSW: 794\n")
 

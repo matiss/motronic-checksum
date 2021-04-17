@@ -8,6 +8,31 @@ import (
 
 // Note: All tests should be performed against original binary files
 
+func TestBMW157C165Checksum(t *testing.T) {
+	file, err := os.Open("./firmwares/BMW/157C165_ori.bin")
+	defer file.Close()
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	buf, err := ioutil.ReadAll(file)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if err = BMW157C165Validate(buf); err != nil {
+		t.Errorf("Invalid test binary file")
+		return
+	}
+
+	sum, _ := BMW173Checksum(buf, false)
+	if sum != 0x6A57 {
+		t.Errorf("Checksum failed, expected: %X got: %X", 0x6A57, sum)
+	}
+}
+
 func TestBMW173Checksum(t *testing.T) {
 	file, err := os.Open("./firmwares/BMW/173_ori.bin")
 	defer file.Close()
